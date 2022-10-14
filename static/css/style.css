@@ -1,0 +1,27 @@
+.s1{
+	height: 600px;
+	display:inline-block;
+	vertical-align:top;
+}
+.menu{
+	width: 150px;
+	background: #8fd0d4;
+	text-align: center;
+}
+.menu a{
+	display: block;
+	padding: 10px;
+	margin: 10px;
+	background: #fff;
+	color: #666;
+	text-decoration: none;
+}
+.menu a.selected{
+	background: #c00;
+	color: #fff;
+}
+.content{
+	width: 900px;
+	padding: 10px;
+	background: #ecfdff;
+}
