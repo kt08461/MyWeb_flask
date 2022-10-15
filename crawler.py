@@ -6,7 +6,7 @@ def crawlerFunc():
     t_arr=[]
 
     # 抓取 PTT Stock版的網頁原始碼 (HTML)
-    pages=2
+    pages=10
     url="/bbs/Stock/index.html"
     getTitles(pages, url, t_arr)
 
