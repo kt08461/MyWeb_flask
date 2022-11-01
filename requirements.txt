@@ -3,3 +3,4 @@ gunicorn
 beautifulsoup4
 jieba
 numpy
+matplotlib
