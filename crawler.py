@@ -3,7 +3,7 @@ import urllib.request as req
 import re
 import bs4
 
-def crawlerFunc():
+def crawlerMain():
     t_arr=[]
 
     # 抓取 PTT 八卦版的網頁原始碼 (HTML)

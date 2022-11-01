@@ -7,15 +7,17 @@ app.config.from_pyfile('configs.py')
 def home():
     return render_template("index.html")
 
+@app.route("/students")
+def pandas():
+    import students
+
+    return students.pandasMain()
+
 @app.route("/crawler", methods=['GET', 'POST']) # Crawler、jieba
 def crawler():
     import crawler
 
-    return crawler.crawlerFunc()
-
-@app.route("/p2")
-def p2():
-    return render_template("p2.html")
+    return crawler.crawlerMain()
 
 if __name__=="__main__": # 如果以主程式執行
     app.run() # 立刻啟動伺服器
