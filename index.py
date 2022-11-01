@@ -11,7 +11,6 @@ def home():
 def crawler():
     import crawler
 
-    # return render_template("p1.html")
     return crawler.crawlerFunc()
 
 @app.route("/p2")
