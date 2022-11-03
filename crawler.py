@@ -15,7 +15,9 @@ def crawlerMain():
     tags=getKeyWords(t_arr)
 
     # 產生html Code
-    return render_template("crawler.html").format(url, pages, len(t_arr), "、".join(tags))
+    text = {'ptt_board_url':url, 'total_pages':pages, 'titles_count':len(t_arr), 'ten_KeyWords': "、".join(tags)}
+    return render_template("crawler.html", text=text)
+
 
 # 關鍵字詞分析
 def getKeyWords(t_arr):
