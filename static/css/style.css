@@ -1,10 +1,13 @@
+.main{
+	background-color: #ecfdff;
+}
 .s1{
-	height: 600px;
 	display:inline-block;
 	vertical-align:top;
 }
 .menu{
 	width: 150px;
+	height: 600px;
 	background: #8fd0d4;
 	text-align: center;
 }
@@ -21,7 +24,6 @@
 	color: #fff;
 }
 .content{
-	width: 900px;
 	padding: 10px;
 	background: #ecfdff;
 }
