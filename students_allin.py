@@ -1,3 +1,7 @@
+# =============================================================================
+# 分析110學年大專院校學生數據
+# 3張圖 All in One: subplots
+# =============================================================================
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -20,18 +24,14 @@ def pandasMain():
 
     # 統計男、女學生人數
     cntGender()
-    # text["plot_schools"] = imgBase64()
-
 
     # 統計各縣市男、女學生人數
     cntGenderByCity()
-    # text["plot_students"] = imgBase64()
 
     plt.tight_layout()
     text["plot_all_in_one"] = imgBase64()
 
-    # plt.show()
-    return render_template("students.html", text=text)
+    return render_template("students_allin.html", text=text)
 
 def init_data():
     def setImgFont():
@@ -177,4 +177,3 @@ def imgBase64():
 
 text = {'plot':{}}
 df110 = init_data()
-# pandasMain()

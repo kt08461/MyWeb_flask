@@ -9,9 +9,13 @@ def home():
 
 @app.route("/students")
 def pandas():
-    import students
+    import students_allin
 
-    return students.pandasMain()
+    return students_allin.pandasMain()
+# def pandas():
+#     import students
+
+#     return students.pandasMain()
 
 @app.route("/crawler", methods=['GET', 'POST']) # Crawler、jieba
 def crawler():
