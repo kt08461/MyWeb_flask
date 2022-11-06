@@ -1,3 +1,7 @@
+# =============================================================================
+# 分析110學年大專院校學生數據
+# 3張圖 各自顯示
+# =============================================================================
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -8,29 +12,21 @@ from flask import Flask, render_template
 from io import BytesIO
 
 TitleFont = {'fontsize':16, 'fontweight':'bold'}
-fig = plt.figure(figsize=(10, 15)) # 寬, 高
 
 def pandasMain():
 
     # 統計國立、私立學校數量
     cntSchools()
 
+    # 統計男、女學生人數
+    cntGender()
+
     # 統計各縣市有多少學校
     cntSchoolsByCity()
 
-    # 統計男、女學生人數
-    cntGender()
-    # text["plot_schools"] = imgBase64()
-
-
     # 統計各縣市男、女學生人數
     cntGenderByCity()
-    # text["plot_students"] = imgBase64()
 
-    plt.tight_layout()
-    text["plot_all_in_one"] = imgBase64()
-
-    # plt.show()
     return render_template("students.html", text=text)
 
 def init_data():
@@ -71,7 +67,7 @@ def imgStudents(df_n, df_p):
     L1 = ['公立學校', '私立學校']
     L2 = ['男生', '女生']
 
-    plt.subplot(312)
+    fig = plt.figure(figsize=(8,5))
     plt.title('公、私立學生人數比例', weight = 'bold', fontdict=TitleFont)    
     plt.gca().axis("equal")
     ax = plt.gca()
@@ -89,6 +85,7 @@ def imgStudents(df_n, df_p):
             autopct=lambda i: img_text(i, X.flatten()),
             textprops=dict(color="k", size="smaller"), wedgeprops=dict(width=pie_size, edgecolor='w'))
     plt.legend(wg1+wg2[:2], L1+L2, fontsize = 'large', loc='best')
+    text["plot_students"] = imgBase64(fig)
 
 # 統計男、女學生人數
 def cntGender():
@@ -115,7 +112,7 @@ def imgSchoolsByCity(df):
     Y = list(df['學校數量'])
 
     # 長條圖
-    plt.subplot(311)
+    fig = plt.figure(figsize=(10,5))
     ax = plt.gca()
     ax.set_title('各縣市學校數量', TitleFont, va='baseline')
     ax.spines['right'].set_visible(False)
@@ -128,6 +125,7 @@ def imgSchoolsByCity(df):
 
     plt.xticks(X,df.index, rotation=90)
     plt.ylabel('學校數量')
+    text["plot_schools"] = imgBase64(fig)
 
 # 統計各縣市男、女學生人數
 def cntGenderByCity():
@@ -143,7 +141,7 @@ def imgGenderByCity(df):
     F = M+bar_width
 
     # 設定bar的圖型
-    plt.subplot(313)
+    fig = plt.figure(figsize=(13,5))
     ax = plt.gca()
     ax.set_title('各縣市男、女學生人數', TitleFont)
     ax.spines['right'].set_visible(False)
@@ -162,19 +160,18 @@ def imgGenderByCity(df):
 
     plt.xticks(M+bar_width/2,df.index, rotation=90)
     plt.ylabel('學生人數')
-    plt.legend(handles=[lm,lf], labels=['男生','女生'], fontsize = 'x-large', loc='best')
+    plt.legend(handles=[lm,lf], labels=['男生','女生'], fontsize = 'large', loc='best')
     plt.grid(True)
+    text["plot_city_students"] = imgBase64(fig)
 
 # 圖檔轉Base64
-def imgBase64():
+def imgBase64(fig):
     img_fp = BytesIO()
     fig.savefig(img_fp, format='png', bbox_inches='tight')
     img_b64 = base64.encodebytes(img_fp.getvalue()).decode()
     img_b64 = 'data:image/png;base64,' + str(img_b64)
-    plt.cla()
 
     return img_b64
 
 text = {'plot':{}}
 df110 = init_data()
-# pandasMain()

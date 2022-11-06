@@ -19,11 +19,11 @@ def pandasMain():
     # 統計國立、私立學校數量
     cntSchools()
 
-    # 統計各縣市有多少學校
-    cntSchoolsByCity()
-
     # 統計男、女學生人數
     cntGender()
+
+    # 統計各縣市有多少學校
+    cntSchoolsByCity()
 
     # 統計各縣市男、女學生人數
     cntGenderByCity()
@@ -171,7 +171,6 @@ def imgBase64():
     fig.savefig(img_fp, format='png', bbox_inches='tight')
     img_b64 = base64.encodebytes(img_fp.getvalue()).decode()
     img_b64 = 'data:image/png;base64,' + str(img_b64)
-    plt.cla()
 
     return img_b64
 
